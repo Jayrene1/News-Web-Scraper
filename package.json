@@ -1,0 +1,33 @@
+{
+  "name": "news-web-scraper",
+  "version": "1.0.0",
+  "description": "This express app uses Cheerio to scrape news articles and stores data in a Mongo database using Mongoose",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jayrene1/News-Web-Scraper.git"
+  },
+  "keywords": [
+    "Cheerio",
+    "web",
+    "scraper",
+    "news",
+    "media",
+    "mongoose"
+  ],
+  "author": "Joshua Arcega",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jayrene1/News-Web-Scraper/issues"
+  },
+  "homepage": "https://github.com/Jayrene1/News-Web-Scraper#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.19"
+  }
+}
