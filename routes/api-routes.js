@@ -1,30 +1,33 @@
 var db = require('../models');
+var axios = require("axios");
+var cheerio = require("cheerio");
 
 module.exports = function(app) {
     app.get("/scrape", function(req, res) {
-    axios.get("http://www.echojs.com/").then(function(response) {
+    axios.get("https://www.foxnews.com/").then(function(response) {
         var $ = cheerio.load(response.data);
+        var result = [];
 
-        $("article h2").each(function(i, element) {
-        var result = {};
-
-        result.title = $(this)
-            .children("a")
-            .text();
-        result.link = $(this)
-            .children("a")
-            .attr("href");
-
-        db.Article.create(result)
-            .then(function(dbArticle) {
-            console.log(dbArticle);
-            })
-            .catch(function(err) {
-            console.log(err);
-            });
+        $(".collection-spotlight").find(".article").each(function(i, element) {
+            var $title = $(element).find(".info-header").find(".title").find("a");
+            var $img = $(element).find("img").attr("src");
+            if ($title.text()) {
+                var article = {};
+                article.title = $title.text();
+                article.link = $title.attr("href");
+                article.img = $img;
+                result.push(article);    
+            }    
+            /*db.Article.create(result)
+                .then(function(dbArticle) {
+                console.log(dbArticle);
+                })
+                .catch(function(err) {
+                console.log(err);
+                });*/
         });
-
-        res.send("Scrape Complete");
+        res.json(result);
+        /*res.send("Scrape Complete");*/
     });
     });
 
