@@ -4,31 +4,29 @@ var cheerio = require("cheerio");
 
 module.exports = function(app) {
     app.get("/scrape", function(req, res) {
-    axios.get("https://www.foxnews.com/").then(function(response) {
-        var $ = cheerio.load(response.data);
-        var result = [];
+        axios.get("https://www.foxnews.com/").then(function(response) {
+            var $ = cheerio.load(response.data);
 
-        $(".collection-spotlight").find(".article").each(function(i, element) {
-            var $title = $(element).find(".info-header").find(".title").find("a");
-            var $img = $(element).find("img").attr("src");
-            if ($title.text()) {
-                var article = {};
-                article.title = $title.text();
-                article.link = $title.attr("href");
-                article.img = $img;
-                result.push(article);    
-            }    
-            /*db.Article.create(result)
-                .then(function(dbArticle) {
-                console.log(dbArticle);
-                })
-                .catch(function(err) {
-                console.log(err);
-                });*/
+            $(".collection-spotlight").find(".article").each(function(i, element) {
+                var $title = $(element).find(".info-header").find(".title").find("a");
+                var $img = $(element).find("img").attr("src");
+                if ($title.text()) {
+                    var article = {};
+                    article.title = $title.text();
+                    article.link = $title.attr("href");
+                    article.img = $img;
+                    // Add Article to database if it doesn't exist yet
+                    db.Article.findOneAndUpdate({title: article.title}, article, {upsert: true})
+                        .then(function(dbArticle) {
+                        //console.log(dbArticle);
+                        })
+                        .catch(function(err) {
+                        console.log(err);
+                        });
+                }    
+            });
+            res.send("Articles scraped!");
         });
-        res.json(result);
-        /*res.send("Scrape Complete");*/
-    });
     });
 
     app.get("/articles", function(req, res) {
@@ -49,6 +47,14 @@ module.exports = function(app) {
         })
         .catch(function(err) {
         res.json(err);
+        });
+    });
+
+    app.get("/deleteall", function(req, res) {
+        db.Article.find({}).deleteMany(function(dbArticle) {
+            res.send("Articles deleted!");
+        }).catch(function(err) {
+            res.json(err);
         });
     });
 
