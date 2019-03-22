@@ -11,10 +11,13 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
-  comment: {
+  img: {
+    type: String,
+  },
+  comments: [{
     type: Schema.Types.ObjectId,
     ref: "Comment"
-  }
+  }]
 }, {timestamps: true});
 
 var Article = mongoose.model("Article", ArticleSchema);

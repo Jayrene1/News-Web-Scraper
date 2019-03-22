@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>News Scraper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Materialize.css CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper light-blue darken-1">
+            <a href="#" class="brand-logo center">News Scraper</a>
+        </div>
+    </nav>
+    <main class="container">
+        <div class="row">
+            <div class="col s12 center-align">
+                <h3>Select a news media site to scrape</h3>
+            </div>
+            <div class="divider"></div>
+            <div class="col s12 m6 left-align">
+                <h4>Site 1</h4>
+                <div class="divider"></div>
+                <div class="section articles-1">
+                </div>
+            </div>
+            <div class="col s12 m6">
+
+            </div>    
+        </div>
+          <!-- Modal Structure -->
+        <div id="comment-box" class="modal">
+            <div class="modal-content center-align">
+                <h4>Add a Comment</h4>
+                <form class="col s12">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="author" type="text">
+                        <label for="author">Name</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <textarea id="body" class="materialize-textarea"></textarea>
+                        <label for="body">Comment Here...</label>
+                    </div>
+                    <button type="submit" class="waves-effect blue waves-green btn" id="submit">submit</button>
+
+                </form>
+            </div>
+            <div class="divider"></div>
+            <div class="modal-content">
+                <div class="col s12" id="comment-section">
+                    No Comments Here
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-red btn-flat">close</a>
+            </div>
+        </div>
+    </main>
+    <footer class="page-footer light-blue darken-1">
+        <div class="footer-copyright">
+            <div class="container">
+            Joshua Arcega © 2019
+            <a class="grey-text text-lighten-4 right" href="https://github.com/Jayrene1/News-Web-Scraper">Github</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Materialize.css Javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>    
+    <script src="./js/index.js"></script>        
+</body>
+</html>

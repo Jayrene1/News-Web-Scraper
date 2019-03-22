@@ -31,6 +31,7 @@ module.exports = function(app) {
 
     app.get("/articles", function(req, res) {
     db.Article.find({})
+        .populate("comments")
         .then(function(dbArticle) {
         res.json(dbArticle);
         })
@@ -41,7 +42,7 @@ module.exports = function(app) {
 
     app.get("/articles/:id", function(req, res) {
     db.Article.findOne({ _id: req.params.id })
-        .populate("note")
+        .populate("comments")
         .then(function(dbArticle) {
         res.json(dbArticle);
         })
@@ -59,9 +60,9 @@ module.exports = function(app) {
     });
 
     app.post("/articles/:id", function(req, res) {
-    db.Note.create(req.body)
-        .then(function(dbNote) {
-        return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+    db.Comment.create(req.body)
+        .then(function(dbComment) {
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: {comments: dbComment._id} }, { new: true });
         })
         .then(function(dbArticle) {
         res.json(dbArticle);

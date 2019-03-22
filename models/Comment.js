@@ -3,9 +3,13 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var CommentSchema = new Schema({
-  title: String,
-  body: String
-});
+  author: {
+    type: String
+  },
+  body: {
+    type: String
+  }
+}, {timestamps: true});
 
 var Comment = mongoose.model("Comment", CommentSchema);
 module.exports = Comment;
