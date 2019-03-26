@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    var thisArticle = "";
+  moment().format();
+  var thisArticle = "";
 
   $.get("/articles", function(data) {
     var elems = document.querySelectorAll(".modal");
@@ -20,13 +21,18 @@ $(document).ready(function() {
     $.get(`/articles/${thisArticle}`, function(data) {
         $("#comment-section").empty();
         for (var i = 0; i < data.comments.length; i++) {
-            console.log(data.comments[i].updatedAt)
-            var date = moment("YYYY-MM-DDTHH:mm:ss.SSSZ", data.comments[i].updatedAt).calendar();
-          $("#comment-section").append([
-              $("<h5>").html(data.comments[i].author),
-              $("<p>").html(data.comments[i].body),
-              $("<p>").attr("class", "grey-text right").html(date)
-            ]);
+            var updatedAt = data.comments[i].updatedAt;
+            var date = moment.utc(updatedAt).fromNow(); //utc converts mongo's default UTC format
+          $("#comment-section").append(
+            $("<div>")
+              .attr("class", "comment")
+              .append([
+                $("<h5>").html(data.comments[i].author),
+                $("<p>").html(data.comments[i].body),
+                $("<p>").attr("class", "grey-text").html(date),
+                $("<div>").attr("class", "divider")
+              ])
+          )
         }
     });
   }
@@ -74,11 +80,10 @@ $(document).ready(function() {
           .trim()
       };
       $.post(`/articles/${thisArticle}`, data).then(function(data) {
-        console.log(data);
+        populateComments();
       });
       $("#author").val("");
       $("#body").val("");
-      populateComments();
     });
   }
 });

@@ -12,6 +12,12 @@ main {
     padding-top: 0;
   }
 
-.modal {
-    /*width: 39%;
+.comment {
+  position: relative;
+}
+
+.comment .grey-text {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

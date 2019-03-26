@@ -53,7 +53,12 @@ module.exports = function(app) {
 
     app.get("/deleteall", function(req, res) {
         db.Article.find({}).deleteMany(function(dbArticle) {
-            res.send("Articles deleted!");
+            //
+        }).catch(function(err) {
+            res.json(err);
+        });
+        db.Comment.find({}).deleteMany(function(dbComment) {
+            res.send("Articles + comments deleted!");
         }).catch(function(err) {
             res.json(err);
         });
