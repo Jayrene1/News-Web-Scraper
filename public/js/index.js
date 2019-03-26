@@ -1,10 +1,9 @@
 $(document).ready(function() {
-  moment().format();
+  var elems = document.querySelectorAll(".modal");
+  var instances = M.Modal.init(elems);
   var thisArticle = "";
 
   $.get("/articles", function(data) {
-    var elems = document.querySelectorAll(".modal");
-    var instances = M.Modal.init(elems);
     populateArticles(data, commentEventListener);
   });
 
@@ -34,12 +33,24 @@ $(document).ready(function() {
               ])
           )
         }
+        $(`[data-articleid=${thisArticle}] > span`).text(data.comments.length);
     });
   }
 
   function populateArticles(data, callback) {
     for (article of data) {
-      $(".articles-1").append([
+      var articleColumn = "";
+
+      if (article.site === "Fox News") {
+        articleColumn = ".articles-1";
+      } else if (article.site === "NPR") {
+        articleColumn = ".articles-2";
+      }
+
+      var updatedAt = article.updatedAt;
+      var date = moment.utc(updatedAt).format("MM/DD/YYYY"); //utc converts mongo's default UTC format
+
+      $(articleColumn).append([
         $("<img>").attr({ src: article.img, class: "responsive-img" }),
         $("<div>", { class: "section" }).append(
           $("<a>")
@@ -47,7 +58,7 @@ $(document).ready(function() {
             .append($("<h5>").text(article.title))
         ),
         $("<div>")
-          .attr("class", "collection")
+          .attr("class", "collection left-align")
           .append(
             $("<a>")
               .attr({
@@ -55,7 +66,7 @@ $(document).ready(function() {
                 "data-articleid": article._id,
                 class: "collection-item modal-trigger"
               })
-              .text("comments")
+              .text(`${date} || See Comments`)
               .append(
                 $("<span>")
                   .attr("class", "new badge")
@@ -79,11 +90,13 @@ $(document).ready(function() {
           .val()
           .trim()
       };
-      $.post(`/articles/${thisArticle}`, data).then(function(data) {
-        populateComments();
-      });
-      $("#author").val("");
-      $("#body").val("");
+      if (data.author && data.body) {
+        $.post(`/articles/${thisArticle}`, data).then(function(data) {
+          populateComments();
+        });
+      }
+        $("#author").val("");
+        $("#body").val("");
     });
   }
 });

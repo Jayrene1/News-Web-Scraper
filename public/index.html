@@ -19,17 +19,21 @@
     <main class="container">
         <div class="row">
             <div class="col s12 center-align">
-                <h3>Select a news media site to scrape</h3>
-            </div>
-            <div class="divider"></div>
-            <div class="col s12 m6 left-align">
-                <h4>Site 1</h4>
+                <h3>Info</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod quidem nisi suscipit tempora, accusantium odio cupiditate sequi quisquam adipisci rerum hic dicta sapiente quis voluptatem repudiandae. At perferendis quo aliquid!</p>
                 <div class="divider"></div>
-                <div class="section articles-1">
-                </div>
             </div>
-            <div class="col s12 m6">
-
+            <div class="col s12 m6 center-align">
+                <h4>Fox News</h4>
+                <button class="btn margin">Scrape Articles</button>
+                <div class="divider margin"></div>
+                <div class="section articles-1 left-align"></div>
+            </div>
+            <div class="col s12 m6 center-align">
+                <h4>NPR</h4>
+                <button class="btn margin">Scrape Articles</button>
+                <div class="divider margin"></div>
+                <div class="section articles-2 right-align"></div>
             </div>    
         </div>
           <!-- Modal Structure -->
@@ -39,15 +43,15 @@
                 <form class="col s12">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="author" type="text">
+                        <input id="author" type="text" required>
                         <label for="author">Name</label>
                     </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix">mode_edit</i>
-                        <textarea id="body" class="materialize-textarea"></textarea>
+                        <textarea id="body" class="materialize-textarea" required></textarea>
                         <label for="body">Comment Here...</label>
                     </div>
-                    <button type="submit" class="waves-effect blue waves-green btn" id="submit">submit</button>
+                    <input type="submit" class="waves-effect blue waves-green btn text-white" id="submit"></input>
 
                 </form>
             </div>

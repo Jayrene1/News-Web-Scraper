@@ -8,6 +8,10 @@ main {
     flex: 1 0 auto;
   }
 
+.margin {
+  margin: 2rem 0 2rem 0;
+}
+
 .page-footer {
     padding-top: 0;
   }
