@@ -11,6 +11,10 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
+  summary: {
+    type: String,
+    default: "No summary available..."
+  },
   link: {
     type: String,
     required: true

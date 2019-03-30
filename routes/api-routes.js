@@ -53,10 +53,14 @@ module.exports = function(app) {
             .find(".item-info")
             .find(".title")
             .find("a");
+          var $summary = $(element)
+            .find(".item-info")
+            .find(".teaser")
+            .find("a")
           var $img = $(element)
             .find("img")
             .attr("src");
-          if ($title.text()) {
+        if ($title.text()) {
             // Only collect 5 articles, barring blank elements
             if (i >= 5) {
               return false;
@@ -64,6 +68,7 @@ module.exports = function(app) {
             var article = {};
             article.site = "NPR";
             article.title = $title.text();
+            article.summary = $summary.text();
             article.link = $title.attr("href");
             article.img = $img;
             // Add Article to database if it doesn't exist yet
