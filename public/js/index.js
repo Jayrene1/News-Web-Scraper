@@ -57,7 +57,7 @@ $(document).ready(function() {
             .text(article.summary)
         ]),
         $("<div>")
-          .attr("class", "collection left-align")
+          .attr("class", "collection blue left-align")
           .append(
             $("<a>")
               .attr({
@@ -68,7 +68,7 @@ $(document).ready(function() {
               .text(`${date} || See Comments`)
               .append(
                 $("<span>")
-                  .attr("class", "new badge")
+                  .attr("class", "new badge blue")
                   .text(article.comments.length)
               )
           ),

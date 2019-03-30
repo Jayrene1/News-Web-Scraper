@@ -12,9 +12,9 @@ main {
   margin: 2rem 0 2rem 0;
 }
 
-.page-footer {
-    padding-top: 0;
-  }
+.collection, a.collection-item {
+  color: #039be5 !important;
+}
 
 .comment {
   position: relative;
@@ -24,6 +24,10 @@ main {
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+.page-footer {
+  padding-top: 0;
 }
 
 #github {
